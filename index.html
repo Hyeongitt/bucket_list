@@ -176,7 +176,7 @@
           .then((res) => res.json())
           .then((data) => {
             let done_buckets = data["result"];
-            let btn = `<a id="return_btn" href="index.html">돌아가기</a>`;
+            let btn = `<a id="return_btn" href="http://localhost:5001/">돌아가기</a>`;
             $("#bucket-list").empty();
             $("#done_list").empty();
             $("#done_list").append(btn);
