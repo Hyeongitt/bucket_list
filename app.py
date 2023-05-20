@@ -12,11 +12,13 @@ db = client.dbsparta
 def home():
     return render_template('index.html')
 
+# bucket 컬랙션에서 전부 불러오기 
 @app.route("/bucket", methods=["GET"])
 def bucket_get():
     buckets = list(db.bucket.find({},{'_id':False}))
     return jsonify({'result': buckets})
 
+# bucket 컬렉션에 저장하기
 @app.route("/bucket", methods=["POST"])
 def bucket_post():
     bucket_receive = request.form['bucket_give']
@@ -26,6 +28,7 @@ def bucket_post():
     db.bucket.insert_one(doc)
     return jsonify({'msg': '저장 완료!'})
 
+# bucket 컬렉션에서 삭제하기
 @app.route("/bucket/del", methods=["POST"])
 def bucket_del():
     bucket_receive = request.form['bucket_give']
@@ -35,6 +38,7 @@ def bucket_del():
     db.bucket.delete_one(doc)
     return jsonify({'msg': '삭제 완료!'})
 
+# bucket_done 컬렉션에 저장하기
 @app.route("/bucket/done", methods=["POST"])
 def bucket_done_post():
     bucket_receive = request.form['bucket_give']
@@ -44,11 +48,13 @@ def bucket_done_post():
     db.bucket_done.insert_one(doc)
     return jsonify({'msg': '버킷 달성 완료!'})
 
+#  bucket_done 컬렉션 전부 불러오기
 @app.route("/bucket/done", methods=["GET"])
 def bucket_done_get():
     buckets = list(db.bucket_done.find({},{'_id':False}))
     return jsonify({'result': buckets})
 
+# bucket 컬렉션에서 찾아 수정하기
 @app.route("/bucket/edit", methods=["POST"])
 def bucket_edit():
     edit_bucket_receive = request.form['edit_bucket_give']
